@@ -23,8 +23,8 @@ def currency_start(message):
 
 
 def convert_summa(message_conv):
-
     global amount
+
     try:
         amount = int(message_conv.text.strip())
 
@@ -41,9 +41,11 @@ def convert_summa(message_conv):
         btn_conv2 = types.InlineKeyboardButton('EUR/USD', callback_data='eur/usd')
         btn_conv3 = types.InlineKeyboardButton('RUB/USD', callback_data='rub/usd')
         btn_conv4 = types.InlineKeyboardButton('RUB/EUR', callback_data='rub/eur')
+        btn_conv5 = types.InlineKeyboardButton('USD/RUB', callback_data='usd/rub')
+        btn_conv6 = types.InlineKeyboardButton('EUR/RUB', callback_data='eur/rub')
         btn_back = types.InlineKeyboardButton('Вернуться назад', callback_data='back')
 
-        markup_conv.add(btn_conv1, btn_conv2, btn_conv3, btn_conv4, btn_back)
+        markup_conv.add(btn_conv1, btn_conv2, btn_conv3, btn_conv4, btn_conv5, btn_conv6, btn_back)
         bot.send_message(message_conv.chat.id, 'Выберите пару валют для конвертации', reply_markup=markup_conv)
 
     else:
