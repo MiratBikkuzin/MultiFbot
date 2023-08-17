@@ -1,10 +1,9 @@
-import telebot
-from telebot import types
-import random
+from telebot import TeleBot, types
+from random import randint
 from currency_converter import CurrencyConverter
 
 
-bot = telebot.TeleBot('6205240292:AAGDlOC9k8eyseDB_XguUSgnkVwoJRzLhlI')
+bot = TeleBot('6205240292:AAGDlOC9k8eyseDB_XguUSgnkVwoJRzLhlI')
 currency = CurrencyConverter()
 amount = 0
 
@@ -12,8 +11,8 @@ amount = 0
 @bot.message_handler(commands=['start'])
 def start_mes(message):
 
-    bot.send_message(message.chat.id, 'Привет, {0.first_name}! Чтобы вспользоваться мной, '
-                                      'можешь посмотреть моё меню команд'.format(message.from_user))
+    bot.send_message(message.chat.id, 'Привет, {0.first_name}! Чтобы вспользоваться мной, можешь '
+                                      'посмотреть моё меню команд'.format(message.from_user))
 
 
 @bot.message_handler(commands=['currenconv'])
@@ -31,8 +30,8 @@ def convert_summa(message_conv):
 
     except ValueError:
 
-        bot.send_message(message_conv.chat.id, 'Неверный формат. Используйте команду заново и '
-                                               'впишите число больше 0 для конвертации')
+        bot.send_message(message_conv.chat.id, 'Неверный формат. Используйте команду заново и впишите '
+                                               'число больше 0 для конвертации')
         return
 
     if amount > 0:
@@ -92,9 +91,10 @@ def bot_message(message):
         bot.send_message(message.chat.id, 'Вы выбрали: Информация о боте', reply_markup=markup3)
 
     elif message.text == 'О боте':
-        bot.send_message(message.chat.id, 'Привет, {0.first_name}! Это бот, который будет обновляться ежедневно. '
-                                                      'Может быть сейчас он не такой интересный, как тебе хотелось бы, '
-                                                      'но в скором времени он будет лучше'.format(message.from_user))
+        bot.send_message(message.chat.id, 'Привет, {0.first_name}! Это бот, который будет обновляться ежедневно. Может '
+                                          'быть сейчас он не такой интересный, как тебе хотелось бы, но в скором '
+                                          'времени'
+                                          ' он будет лучше'.format(message.from_user))
 
     elif message.text == 'Чат-бот ChatGPT':
 
@@ -110,10 +110,11 @@ def bot_message(message):
         bot.send_message(message.chat.id, 'https://t.me/GPTtg_bot?start=2117781172')
 
     elif message.text == 'Рандомное число':
-        rand = random.randint(1, 1000)
-        bot.send_message(message.chat.id, rand)
-        if rand % 2 == 0:
-            bot.send_message(message.chat.id, 'Ого!! Вам повезло)')
+        n = randint(1, 100)
+        if n in tuple(i for i in range(10, 101, 10)):
+            bot.send_message(message.chat.id, f'Ого!! Вам выпало счастливое число {n}')
+        else:
+            bot.send_message(message.chat.id, f'К сожалению, на этот раз вам не повезло. Вам выпало число {n}')
 
     elif message.text == 'Вернуться назад':
 
