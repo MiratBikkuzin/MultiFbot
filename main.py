@@ -90,6 +90,7 @@ def bot_message(message):
     elif message.text == 'Рандомное число':
         n = randint(1, 100)
         if n in tuple(i for i in range(10, 101, 10)):
+            bot.send_video(message.chat.id, open('dinosaur congrats.gif', 'rb'))
             bot.send_message(message.chat.id, f'Ого!! Вам выпало счастливое число {n}')
         else:
             bot.send_message(message.chat.id, f'К сожалению, на этот раз вам не повезло. Вам выпало число {n}')
